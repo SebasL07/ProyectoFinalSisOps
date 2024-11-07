@@ -54,7 +54,7 @@ ROOT_URLCONF = 'proyecto_final_sisops.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'monitor_procesos_Windows/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
