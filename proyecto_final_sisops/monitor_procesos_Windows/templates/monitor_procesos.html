@@ -54,7 +54,7 @@
             <td>
                 <form action="{% url 'terminar_proceso' %}" method="post" style="display:inline;">
                     {% csrf_token %}
-                    <input type="hidden" name="process_id" value="{{ proceso.id }}">
+                    <input type="hidden" name="process_id" value="{{ proceso.Id }}">
                     <button type="submit">Cancelar</button>
                 </form>
             </td>

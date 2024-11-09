@@ -45,7 +45,7 @@ def monitor_procesos(request):
     result = subprocess.run(['powershell', '-File', obtener_procesos_script], capture_output=True, text=True)
 
     # Verifica la salida del script
-    print(f"Resultado del script: {result.stdout}")
+    # print(f"Resultado del script: {result.stdout}")
 
     if result.returncode != 0:
         print(f"Error en el script: {result.stderr}")
@@ -58,10 +58,13 @@ def terminar_proceso(request):
         process_id = request.POST.get('process_id')
         
         # Construye la ruta absoluta al script
-        terminar_proceso_script = os.path.join(settings.BASE_DIR, 'monitor_procesos/scripts/terminar_proceso.ps1')
+        terminar_proceso_script = os.path.join(settings.BASE_DIR, 'monitor_procesos_Windows/scripts/terminar_procesos.ps1')
         
-        # Llama al script de PowerShell para terminar el proceso
-        subprocess.run(['powershell', '-File', terminar_proceso_script, '-processId', process_id])
+        # Ejecutar el script para terminar el proceso y capturar cualquier error
+        result = subprocess.run(['powershell', '-File', terminar_proceso_script, '-processId', process_id], capture_output=True, text=True)
         
+        if result.returncode != 0:
+            print(f"Error al terminar el proceso {process_id}: {result.stderr}")
+
     return redirect('monitor_procesos')
 
