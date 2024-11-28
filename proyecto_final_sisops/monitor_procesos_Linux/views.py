@@ -19,8 +19,14 @@ def monitor_procesos_linux(request):
     with open(csv_file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile, fieldnames=['User', 'Id', 'CPU', 'Memory', 'VSZ', 'RSS', 'TTY', 'Name'], delimiter=';')
         for row in reader:
-            row['cpu'] = f"{float(row['CPU']):.2f}%" if row['CPU'] else 'N/A'
-            row['memoria'] = f"{float(row['Memory']):.2f} MB" if row['Memory'] else 'N/A'
+            try:
+                row['cpu'] = f"{float(row['CPU']):.2f}%" if row['CPU'].replace('.', '', 1).isdigit() else 'N/A'
+            except ValueError:
+                row['cpu'] = 'N/A'
+            try:
+                row['memoria'] = f"{float(row['Memory']):.2f} MB" if row['Memory'].replace('.', '', 1).isdigit() else 'N/A'
+            except ValueError:
+                row['memoria'] = 'N/A'
             procesos.append(row)
 
     # Renderiza la página HTML con la lista de procesos
