@@ -54,10 +54,10 @@ def monitor_procesos_windows(request):
     else:
         
         # Construye la ruta absoluta al script
-        obtener_procesos_script = os.path.join(settings.BASE_DIR, 'monitor_procesos_Windows/scripts/show_all_process.sh')
+        result = os.path.join(settings.BASE_DIR, 'monitor_procesos_Windows/scripts/show_all_process.sh')
 
         # Ejecuta el script
-        subprocess.run(['bash', obtener_procesos_script])
+        subprocess.run(['bash', result])
 
         # Ruta al archivo CSV generado por el script
         csv_file_path = os.path.join(settings.BASE_DIR, 'monitor_procesos_Windows/scripts/db.csv')
