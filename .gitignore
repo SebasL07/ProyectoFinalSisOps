@@ -59,3 +59,6 @@ htmlcov/
 
 # Pytest cache
 .pytest_cache/
+
+# Ignore CSV files
+*.csv

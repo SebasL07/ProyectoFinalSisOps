@@ -8,7 +8,7 @@ import platform
 def monitor_procesos_windows(request):
 
 
-    if platform.system() != 'Windows':
+    if platform.system() == 'Windows':
         # Construye la ruta absoluta al script
         obtener_procesos_script = os.path.join(settings.BASE_DIR, 'monitor_procesos_Windows/scripts/obtener_procesos.ps1')
         
@@ -86,7 +86,7 @@ def monitor_procesos_windows(request):
 def terminar_proceso_windows(request):
     if request.method == 'POST':
 
-        if platform.system() != 'Windows':
+        if platform.system() == 'Windows':
             process_id = request.POST.get('process_id')
             
             # Construye la ruta absoluta al script
