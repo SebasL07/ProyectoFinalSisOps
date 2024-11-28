@@ -21,4 +21,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('monitorWindows/', include('monitor_procesos_Windows.urls')),
+    path('monitorLinux/', include('monitor_procesos_Linux.urls')),
 ]

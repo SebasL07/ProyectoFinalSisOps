@@ -3,7 +3,7 @@ import subprocess
 from django.conf import settings
 import os
 
-def monitor_procesos(request):
+def monitor_procesos_windows(request):
     # Construye la ruta absoluta al script
     obtener_procesos_script = os.path.join(settings.BASE_DIR, 'monitor_procesos_Windows/scripts/obtener_procesos.ps1')
     
@@ -53,7 +53,7 @@ def monitor_procesos(request):
     # Renderiza la página HTML con la lista de procesos
     return render(request, 'monitor_procesos.html', {'procesos': procesos})
 
-def terminar_proceso(request):
+def terminar_proceso_windows(request):
     if request.method == 'POST':
         process_id = request.POST.get('process_id')
         
@@ -66,5 +66,5 @@ def terminar_proceso(request):
         if result.returncode != 0:
             print(f"Error al terminar el proceso {process_id}: {result.stderr}")
 
-    return redirect('monitor_procesos')
+    return redirect('monitor_procesos_windows')
 

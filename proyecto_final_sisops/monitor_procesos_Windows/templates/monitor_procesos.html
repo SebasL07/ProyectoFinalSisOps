@@ -59,7 +59,7 @@
             <td>{{ proceso.cpu }}</td>
             <td>{{ proceso.memoria }}</td>
             <td>
-                <form action="{% url 'terminar_proceso' %}" method="post" style="display:inline;">
+                <form action="{% url 'terminar_proceso_windows' %}" method="post" style="display:inline;">
                     {% csrf_token %}
                     <input type="hidden" name="process_id" value="{{ proceso.Id }}">
                     <button type="submit">Cancelar</button>

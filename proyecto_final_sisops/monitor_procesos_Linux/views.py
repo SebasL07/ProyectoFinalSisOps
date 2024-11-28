@@ -4,7 +4,7 @@ from django.conf import settings
 import os
 import csv
 
-def monitor_procesos(request):
+def monitor_procesos_linux(request):
     # Construye la ruta absoluta al script
     obtener_procesos_script = os.path.join(settings.BASE_DIR, 'monitor_procesos_Linux/scripts/show_all_process.sh')
 
@@ -26,19 +26,19 @@ def monitor_procesos(request):
     # Renderiza la página HTML con la lista de procesos
     return render(request, 'monitor_procesos.html', {'procesos': procesos})
 
-def terminar_proceso(request):
+def terminar_proceso_linux(request):
     if request.method == 'POST':
         process_id = request.POST.get('process_id')
         
         # Construye la ruta absoluta al script
-        terminar_proceso_script = os.path.join(settings.BASE_DIR, 'monitor_procesos_Windows/scripts/terminar_procesos.ps1')
+        terminar_proceso_script = os.path.join(settings.BASE_DIR, 'monitor_procesos_Linux/scripts/kill_process.sh')
         
         # Ejecutar el script para terminar el proceso y capturar cualquier error
-        result = subprocess.run(['powershell', '-File', terminar_proceso_script, '-processId', process_id], capture_output=True, text=True)
+        result = subprocess.run(['bash', terminar_proceso_script, process_id], capture_output=True, text=True)
         
         if result.returncode != 0:
             print(f"Error al terminar el proceso {process_id}: {result.stderr}")
 
-    return redirect('monitor_procesos')
+    return redirect('monitor_procesos_linux')
 
 
