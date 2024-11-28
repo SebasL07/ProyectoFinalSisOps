@@ -77,9 +77,6 @@ def monitor_procesos_windows(request):
                     row['memoria'] = 'N/A'
                 procesos.append(row)
 
-    if result.returncode != 0:
-        print(f"Error en el script: {result.stderr}")
-
     # Renderiza la página HTML con la lista de procesos
     return render(request, 'monitor_procesos.html', {'procesos': procesos})
 
